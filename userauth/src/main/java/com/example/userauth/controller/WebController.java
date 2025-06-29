@@ -7,6 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
+
 @Controller
 public class WebController {
 
@@ -14,8 +16,6 @@ public class WebController {
     private UserService userService;
 
     // 🔹 Show registration form
-    // uses GET request
-    //show the register form
     @GetMapping("/register")
     public String showRegistrationForm(Model model) {
         model.addAttribute("user", new User());
@@ -23,8 +23,6 @@ public class WebController {
     }
 
     // 🔹 Handle registration form submission
-    // uses POST request
-    //register the user
     @PostMapping("/register")
     public String registerUser(@ModelAttribute("user") User user, Model model) {
         boolean success = userService.registerUser(user);
@@ -49,12 +47,15 @@ public class WebController {
         return "login";
     }
 
-    // 🔹 Welcome page after login
+    // 🔹 Welcome page after login (shows full name)
     @GetMapping("/welcome")
-    public String welcome(Model model,
-                          @SessionAttribute(name = "SPRING_SECURITY_CONTEXT", required = false) Object securityContext) {
-        
-        model.addAttribute("name", "User"); // replace with actual user name if needed
+    public String welcome(Model model, Principal principal) {
+        String email = principal.getName(); // Email used to log in
+        User user = userService.findByEmail(email); // Get user from DB
+
+        String fullName = user.getFirstName() + " " + user.getLastName();
+        model.addAttribute("fullName", fullName); // Send to view
+
         return "welcome";
     }
 }
