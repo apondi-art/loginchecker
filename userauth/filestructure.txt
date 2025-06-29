@@ -1,0 +1,26 @@
+|-- .gitattributes
+|-- .gitignore
+|-- .mvn
+    |-- wrapper
+        |-- maven-wrapper.properties
+|-- HELP.md
+|-- mvnw
+|-- mvnw.cmd
+|-- pom.xml
+|-- src
+    |-- main
+        |-- java
+            |-- com
+                |-- example
+                    |-- userauth
+                        |-- UserauthApplication.java
+        |-- resources
+            |-- application.properties
+            |-- static
+            |-- templates
+    |-- test
+        |-- java
+            |-- com
+                |-- example
+                    |-- userauth
+                        |-- UserauthApplicationTests.java
