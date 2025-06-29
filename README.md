@@ -27,35 +27,23 @@ cd loginchecker
 cd userauth
 ./mvnw spring-boot:run
 ```
-2. Create MySQL Database
+. Create MySQL Database
 
 Open MySQL shell:
 
 sudo mysql
 
 Then:
-
-CREATE DATABASE userauth_db;
+## create table
+CREATE DATABASE IF NOT EXISTS userauth_db;
 EXIT;
+## using the table
 
-3. Configure Application Properties
+USE userauth_db;
 
-Edit src/main/resources/application.properties:
 
-spring.datasource.url=jdbc:mysql://localhost:3306/userauth_db
-spring.datasource.username=root
-spring.datasource.password=
-
-spring.jpa.hibernate.ddl-auto=update
-spring.jpa.show-sql=true
-spring.jpa.database-platform=org.hibernate.dialect.MySQLDialect
-
-spring.thymeleaf.cache=false
-spring.security.user.name=
-spring.security.user.password=
-
-Update username and password as needed for your MySQL setup.
-▶️ Run the App
+## Check if the users table exists:
+##  Optional: View Table Columns
 
 Use the built-in wrapper:
 
